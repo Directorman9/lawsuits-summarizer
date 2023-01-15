@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" ng-app='summarizer'>
+<head>
+    <title>Lawsuits summarizer</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <link rel="icon" href="/static/images/logo_green.png">
+    <link rel="stylesheet" type="text/css" href="/static/css/shared/fontawesome5.12.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/shared/MDB4.11.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/shared/MDB4.11.0/css/mdb.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/shared.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/summarizer.css">
+
+</head>
+
+<body ng-controller="mainCtrl" ng-init="init()" class="bgtheme">
+    <div id="home-container">       
+        <div class="height-20 margin-3">
+             <span class="big">Lawsuits summarizer</span>
+        </div>
+
+
+        <div class="vertical-flex start cross-center min-height-70 width-100">   
+
+            <div class="inputs space-between margin-3">                  
+                  <input  type="text" class="padding-2 margin-2 width-50 radius-20 bglavender fblack small" placeholder="Input text or link to pdf" ng-model="text" required></input>
+
+                  <span class="huge padding-2 margin-1"> OR </span>
+
+                  <input type="file" class='padding-2 margin-2 width-50 radius-20 bglavender fblack small' ngf-select ng-model="pdfFile" name="file" ngf-pattern="'application/pdf'" accept="application/pdf"/>
+            </div> 
+   
+            <div class="center-text margin-1">
+                     <button class="bggreen padding-5 fwhite small shadow" ng-click="summarize()">Summarize</button>
+            </div>
+
+            <div class="center-text width-70 justify">
+                <p class="margin-1 small">[[progress]]</p>
+                <p class="margin-2 small bold">[[heading]]</p>
+                <p class="margin-1 small justify">[[summary]]</p>
+            </div>
+
+        </div>
+
+            
+
+        
+
+        <div class="text-center small">
+           <span class="fwhite">&copy; 2023 Stefen Colman</span>
+        </div>           
+     </div>
+                    
+</body>
+  <!--AngularJs Scripts-->
+    <script type="text/javascript" src="/static/js/shared/angular.min.js"></script>
+    <script type="text/javascript" src="/static/js/shared/ng-file-upload/ng-file-upload-all.js"></script>
+    <script type="text/javascript" src="/static/js/shared/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.4.js"></script>
+    <script type="text/javascript">
+        var summarizer = angular.module('summarizer', ['ui.bootstrap', 'ngFileUpload'], function($interpolateProvider){
+             $interpolateProvider.startSymbol('[[');
+             $interpolateProvider.endSymbol(']]');
+        });
+    </script>
+    <script type="text/javascript" src="/static/js/main.js"></script>
+</html>
+
