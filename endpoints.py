@@ -48,11 +48,13 @@ class ProgressTracker(threading.Thread):
 
         
         self.progress = "summarizing abstractively...."
-        self.abstractive_summary = summarize_abstractively(extractive_summary)   
+        self.abstractive_summary = summarize_abstractively(extractive_summary)
+        self.abstractive_summary = remove_incomplete_sentence(self.abstractive_summary)  
 
 
         self.progress = "Generating heading...."
         self.heading = generate_heading(extractive_summary)
+        self.heading = remove_incomplete_sentence(self.heading)
         
         self.progress = "finished"
 

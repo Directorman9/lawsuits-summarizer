@@ -76,8 +76,24 @@ def clean_line(line:str)->str:
           return " ".join(line)
     except:
        return ""
-         
+
+
+def remove_incomplete_sentence(inpt:str):
+    '''
+    If a returned summary or heading has an incomplete sentence the remove it.
+    An incomplete sentence is a sentence not ending with a fullstop.
+    '''
+    if inpt.strip()[-1] != '.' and len(inpt.split('.'))>1:
+       inpt = ".".join(inpt.split('.')[:-1])
+       inpt = inpt + "."  
+       
+    return inpt
+            
+            
 def paragraph_to_sentences(paragraph):
+    '''
+    Spilits a paragraph into sentences and choose clean ones.
+    '''
     lines = paragraph.split('\n')
     text = ""
     for line in lines:
@@ -117,6 +133,9 @@ def summarize_extractively(doc:str)->str:
       
 
 def summarize_abstractively(prompt:str):
+    '''
+    Summarizes a prompt i.e. docement abstractively.
+    '''
     max_summary_length = 500
     
     input_ids = tokenizer([prompt], return_tensors="pt")["input_ids"]
@@ -129,6 +148,9 @@ def summarize_abstractively(prompt:str):
     
 
 def generate_heading(prompt:str):
+    '''
+    A different model is used to generate summary headings.
+    '''
     max_summary_length = 30
     
     input_ids = tokenizer([prompt], return_tensors="pt")["input_ids"]
